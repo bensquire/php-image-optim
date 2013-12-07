@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" verbose="true" bootstrap="./tests/Bootstrap.php">
+    <testsuites>
+        <testsuite name="PHPImageOptim Tests">
+            <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">tests/PHPImageOptim</directory>
+        </testsuite>
+    </testsuites>
+
+    <logging>
+        <log type="coverage-html" target="build/coverage" title="bensquire/PHPImageOptim" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="90"/>
+        <log type="coverage-text" target="php://stdout" title="bensquire/PHPImageOptim" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="90"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
+    </logging>
+</phpunit>
