@@ -9,7 +9,7 @@ class PngOut extends Common implements ToolsInterface
 {
     public function optimise()
     {
-        exec($this->binaryPath . ' -s0 -q -y ' . $this->imagePath . ' ' . $this->imagePath, $aOutput, $iResult);
+        exec($this->binaryPath . ' -s1 -q -y ' . $this->imagePath . ' ' . $this->imagePath, $aOutput, $iResult);
 
         if ($iResult == 2)
         {

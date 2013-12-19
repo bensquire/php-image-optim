@@ -23,7 +23,7 @@ class Common
     {
         if (!file_exists($binaryPath))
         {
-            throw new Exception('Unable to location binary file');
+            throw new Exception('Unable to locate binary file');
         }
 
         $this->binaryPath = $binaryPath;
