@@ -40,6 +40,8 @@ class PHPImageOptim
 
     /**
      * Starts the optimisation process
+     *
+     * @return bool
      */
     public function optimise()
     {
@@ -49,5 +51,7 @@ class PHPImageOptim
             $chainedCommand->optimise();
             $chainedCommand->determinePostOptimisedFileSize();
         }
+
+        return true;
     }
 }
