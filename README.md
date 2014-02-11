@@ -6,18 +6,11 @@ The purpose of this library is to help automate the optimisation of images via t
 
 Installation:
 -------------
-The library is PSR-0 compliant and the simplest way to install it is via composer, at the moment it isn't part of the
-main composer package library so it can be included by putting:
+The library is PSR-0 compliant and the simplest way to install it is via composer, simply add:
 
     {
-        "repositories": [
-            {
-                "type": "vcs",
-                "url": "https://github.com/bensquire/php-image-optim"
-            }
-        ],
         "require": {
-            "bensquire/php-image-optim": "master"
+            "bensquire/php-image-optim": "dev-master"
         }
     }
 

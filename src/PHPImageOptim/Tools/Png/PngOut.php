@@ -9,7 +9,7 @@ class PngOut extends Common implements ToolsInterface
 {
     public function optimise()
     {
-        exec($this->binaryPath . ' -s1 -q -y ' . $this->imagePath . ' ' . $this->imagePath, $aOutput, $iResult);
+        exec($this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . $this->imagePath . ' ' . $this->imagePath, $aOutput, $iResult);
 
         if ($iResult == 2)
         {
@@ -22,6 +22,34 @@ class PngOut extends Common implements ToolsInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Returns the optimisation level
+     *
+     * @return string
+     * @throws \Exception
+     */
+    public function getOptimisationLevel()
+    {
+        switch ($this->optimisationLevel)
+        {
+            case 1:
+                return '-s3';
+                break;
+
+            case 2:
+                return '-s2';
+                break;
+
+            case 3:
+                return '-s1';
+                break;
+
+            default:
+                throw new Exception('Unable to calculate optimisation level');
+        }
+
     }
 
     public function checkVersion()
