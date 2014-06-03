@@ -9,10 +9,10 @@ class Gifsicle extends Common implements ToolsInterface
 {
     public function optimise()
     {
-        exec($this->binaryPath . ' gifsicle -O2 ' . $this->imagePath, $aOutput, $iResult);
+        exec($this->binaryPath . ' -b -O2 ' . $this->imagePath, $aOutput, $iResult);
         if ($iResult != 0)
         {
-            throw new Exception('JpegOptim was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+            throw new Exception('Gifsicle was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
