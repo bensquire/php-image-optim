@@ -16,17 +16,6 @@ The library is PSR-0 compliant and the simplest way to install it is via compose
 
 into your composer.json, then run 'composer install' or 'composer update' as required.
 
-Tested with:
-------------
-    gifsicle
-    jpegOptim
-    jpegTran
-    pngQuant - 2.6.0
-    advPng - 1.18
-    optiPng
-    pngCrush - 1.8.0
-    pngOut - Sep 20 2015
-
 Example:
 --------
 This example demonstrates the optimisation of a PNG file, by chaining several commands together.
