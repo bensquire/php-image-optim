@@ -1,6 +1,7 @@
 <?php
 
 namespace PHPImageOptim;
+
 use Exception;
 
 class PHPImageOptim
@@ -12,13 +13,13 @@ class PHPImageOptim
      * Sets the path of the image we want to minify
      *
      * @param string $imagePath
+     *
      * @return $this
      * @throws Exception
      */
     public function setImage($imagePath = '')
     {
-        if (!file_exists($imagePath))
-        {
+        if (!file_exists($imagePath)) {
             throw new Exception('Image doesn\'t exist.');
         }
 
@@ -30,6 +31,7 @@ class PHPImageOptim
      * Adds a command to perform optimisation against
      *
      * @param $object
+     *
      * @return $this
      */
     public function chainCommand($object)

@@ -1,9 +1,10 @@
 <?php
 
 namespace PHPImageOptim\Tools\Png;
-use PHPImageOptim\Tools\ToolsInterface;
-use PHPImageOptim\Tools\Common;
+
 use Exception;
+use PHPImageOptim\Tools\Common;
+use PHPImageOptim\Tools\ToolsInterface;
 
 class PngOut extends Common implements ToolsInterface
 {
@@ -11,13 +12,11 @@ class PngOut extends Common implements ToolsInterface
     {
         exec($this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . $this->imagePath . ' ' . $this->imagePath, $aOutput, $iResult);
 
-        if ($iResult == 2)
-        {
+        if ($iResult == 2) {
             return $this;
         }
 
-        if ($iResult != 0)
-        {
+        if ($iResult != 0) {
             throw new Exception('PNGOUT was Unable to optimise image, result:' . $iResult . ' File: ' . $this->binaryPath);
         }
 
@@ -32,8 +31,7 @@ class PngOut extends Common implements ToolsInterface
      */
     public function getOptimisationLevel()
     {
-        switch ($this->optimisationLevel)
-        {
+        switch ($this->optimisationLevel) {
             case 1:
                 return '-s3';
                 break;

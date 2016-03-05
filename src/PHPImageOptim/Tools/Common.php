@@ -1,6 +1,7 @@
 <?php
 
 namespace PHPImageOptim\Tools;
+
 use Exception;
 
 class Common
@@ -16,13 +17,13 @@ class Common
      * Sets the path of the executable
      *
      * @param string $binaryPath
+     *
      * @return $this
      * @throws Exception
      */
     public function setBinaryPath($binaryPath = '')
     {
-        if (!file_exists($binaryPath))
-        {
+        if (!file_exists($binaryPath)) {
             throw new Exception('Unable to locate binary file');
         }
 
@@ -34,18 +35,17 @@ class Common
      * Sets the path of the image
      *
      * @param $imagePath
+     *
      * @return $this
      * @throws Exception
      */
     public function setImagePath($imagePath)
     {
-        if (!file_exists($imagePath))
-        {
+        if (!file_exists($imagePath)) {
             throw new Exception('Invald image path');
         }
 
-        if (!is_readable($imagePath))
-        {
+        if (!is_readable($imagePath)) {
             throw new Exception('The file cannot be read');
         }
 
@@ -57,21 +57,20 @@ class Common
      * Sets the desired level of optimisation.
      *
      * @param int $level
+     *
      * @return $this
      * @throws \Exception
      */
     public function setOptimisationLevel($level = 2)
     {
-        if (!is_int($level))
-        {
+        if (!is_int($level)) {
             throw new Exception('Invalid Optimisation Level');
         }
 
         if ($level !== ToolsInterface::OPTIMISATION_LEVEL_BASIC &&
             $level !== ToolsInterface::OPTIMISATION_LEVEL_STANDARD &&
             $level !== ToolsInterface::OPTIMISATION_LEVEL_EXTREME
-        )
-        {
+        ) {
             throw new Exception('Invalid Optimisation level');
         }
 
