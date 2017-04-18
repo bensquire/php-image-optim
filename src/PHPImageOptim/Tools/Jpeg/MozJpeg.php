@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace PHPImageOptim\Tools\Jpeg;
 
 use Exception;
 use PHPImageOptim\Tools\Common;
