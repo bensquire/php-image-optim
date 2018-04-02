@@ -8,6 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class AdvPng extends Common implements ToolsInterface
 {
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec($this->binaryPath . ' -z -4 -i20 -- ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
@@ -20,12 +24,10 @@ class AdvPng extends Common implements ToolsInterface
 
     public function optimiseStandard()
     {
-
     }
 
     public function optimiseExtreme()
     {
-
     }
 
     public function checkVersion()

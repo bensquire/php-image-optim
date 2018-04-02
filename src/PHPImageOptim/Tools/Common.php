@@ -14,10 +14,7 @@ class Common
     protected $optimisationLevel = 1;
 
     /**
-     * Sets the path of the executable
-     *
      * @param string $binaryPath
-     *
      * @return $this
      * @throws Exception
      */
@@ -32,10 +29,7 @@ class Common
     }
 
     /**
-     * Sets the path of the image
-     *
      * @param $imagePath
-     *
      * @return $this
      * @throws Exception
      */
@@ -54,12 +48,9 @@ class Common
     }
 
     /**
-     * Sets the desired level of optimisation.
-     *
      * @param int $level
-     *
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
     public function setOptimisationLevel($level = 2)
     {
@@ -79,8 +70,6 @@ class Common
     }
 
     /**
-     * Calculates and stores the pre-optimised fileSize
-     *
      * @return $this
      */
     public function determinePreOptimisedFileSize()
@@ -90,8 +79,6 @@ class Common
     }
 
     /**
-     * Calculates and stores the post-optimised fileSize
-     *
      * @return $this
      */
     public function determinePostOptimisedFileSize()

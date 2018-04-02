@@ -8,6 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class PngCrush extends Common implements ToolsInterface
 {
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         // Pngcrush attempts to write a temporary file to the current directory;
@@ -20,8 +24,7 @@ class PngCrush extends Common implements ToolsInterface
         // Switch back to previous directory
         chdir($prevDir);
 
-        if ($iResult != 0)
-        {
+        if ($iResult != 0) {
             throw new Exception('PNGCrush was unable  to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 

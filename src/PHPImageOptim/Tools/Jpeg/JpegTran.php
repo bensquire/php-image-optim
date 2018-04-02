@@ -8,7 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class JpegTran extends Common implements ToolsInterface
 {
-
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec($this->binaryPath . ' -optimize ' . escapeshellarg($this->imagePath), $aOutput, $iResult);

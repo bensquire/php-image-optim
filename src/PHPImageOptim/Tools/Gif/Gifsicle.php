@@ -8,6 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class Gifsicle extends Common implements ToolsInterface
 {
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec($this->binaryPath . ' -b -O2 ' . escapeshellarg($this->imagePath), $aOutput, $iResult);

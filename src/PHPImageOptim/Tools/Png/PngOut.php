@@ -8,6 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class PngOut extends Common implements ToolsInterface
 {
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec($this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . escapeshellarg($this->imagePath) . ' ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
@@ -47,7 +51,6 @@ class PngOut extends Common implements ToolsInterface
             default:
                 throw new Exception('Unable to calculate optimisation level');
         }
-
     }
 
     public function checkVersion()

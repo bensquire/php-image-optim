@@ -8,6 +8,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class OptiPng extends Common implements ToolsInterface
 {
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec($this->binaryPath . ' -i0 -o7 -zm1-9 ' . escapeshellarg($this->imagePath), $aOutput, $iResult);

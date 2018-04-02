@@ -6,7 +6,14 @@ use Exception;
 
 class PHPImageOptim
 {
+    /**
+     * @var string
+     */
     protected $imagePath = '';
+
+    /**
+     * @var array 
+     */
     protected $chainedCommands = array();
 
     /**
@@ -47,7 +54,7 @@ class PHPImageOptim
      */
     public function optimise()
     {
-        foreach ($this->chainedCommands AS $chainedCommand) {
+        foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->setImagePath($this->imagePath);
             $chainedCommand->optimise();

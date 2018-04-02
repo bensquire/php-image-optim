@@ -10,6 +10,10 @@ class Guetzli extends Common implements ToolsInterface
 {
     private $attributes = '';
 
+    /**
+     * Guetzli constructor.
+     * @param array $options
+     */
     public function __construct($options = ['quality' => 85])
     {
         $arguments = [];
@@ -21,6 +25,10 @@ class Guetzli extends Common implements ToolsInterface
         $this->attributes = join(' ', $arguments);
     }
 
+    /**
+     * @return $this
+     * @throws Exception
+     */
     public function optimise()
     {
         exec(
