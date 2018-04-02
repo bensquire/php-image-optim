@@ -2,7 +2,8 @@
 
 namespace PHPImageOptim;
 
-use Exception;
+use \Exception;
+use PHPImageOptim\Tools\ToolsInterface;
 
 class PHPImageOptim
 {
@@ -12,19 +13,16 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var array 
+     * @var array
      */
-    protected $chainedCommands = array();
+    protected $chainedCommands = [];
 
     /**
-     * Sets the path of the image we want to minify
-     *
      * @param string $imagePath
-     *
      * @return $this
      * @throws Exception
      */
-    public function setImage($imagePath = '')
+    public function setImage(string $imagePath = '')
     {
         if (!file_exists($imagePath)) {
             throw new Exception('Image doesn\'t exist.');
@@ -35,13 +33,10 @@ class PHPImageOptim
     }
 
     /**
-     * Adds a command to perform optimisation against
-     *
-     * @param $object
-     *
+     * @param ToolsInterface $object
      * @return $this
      */
-    public function chainCommand($object)
+    public function chainCommand(ToolsInterface $object)
     {
         $this->chainedCommands[] = $object;
         return $this;

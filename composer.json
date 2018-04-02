@@ -24,8 +24,8 @@
         "friendsofphp/php-cs-fixer": "^2.11"
     },
     "autoload": {
-        "psr-0": {
-            "PHPImageOptim": "src/"
+        "psr-4": {
+            "PHPImageOptim\\": "src/PHPImageOptim"
         }
     }
 }
