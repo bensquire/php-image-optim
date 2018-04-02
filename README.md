@@ -46,3 +46,7 @@ This example demonstrates the optimisation of a PNG file, by chaining several co
         ->chainCommand($pngCrush)
         ->chainCommand($pngOut);
     $optim->optimise();
+
+
+## Fix common coding inconsistencies
+    ./vendor/bin/php-cs-fixer fix .

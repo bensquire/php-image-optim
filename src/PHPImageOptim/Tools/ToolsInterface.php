@@ -7,7 +7,7 @@ interface ToolsInterface
     public const OPTIMISATION_LEVEL_STANDARD = 2;
     public const OPTIMISATION_LEVEL_EXTREME = 3;
 
-    public function optimise();
+    public function optimise(): ToolsInterface;
 
     public function setBinaryPath($binaryPath);
 

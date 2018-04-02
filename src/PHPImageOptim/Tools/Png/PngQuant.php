@@ -9,10 +9,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 class PngQuant extends Common implements ToolsInterface
 {
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
         exec($this->binaryPath . ' --speed 1 --ext=.png --force ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {

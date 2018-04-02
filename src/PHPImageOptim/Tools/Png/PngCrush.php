@@ -9,17 +9,17 @@ use PHPImageOptim\Tools\ToolsInterface;
 class PngCrush extends Common implements ToolsInterface
 {
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
-        // Pngcrush attempts to write a temporary file to the current directory;
-        // make sure we're somewhere we can write a file
+        $absoluteImagePath = realpath($this->imagePath);
+        // Write file to temporary location
         $prevDir = getcwd();
         chdir(sys_get_temp_dir());
 
-        exec($this->binaryPath . ' -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
+        exec($this->binaryPath . ' -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ' . escapeshellarg($absoluteImagePath), $aOutput, $iResult);
 
         // Switch back to previous directory
         chdir($prevDir);

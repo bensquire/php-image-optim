@@ -2,8 +2,7 @@
 
 namespace PHPImageOptim;
 
-use \Exception;
-use PHPImageOptim\Tools\ToolsInterface;
+use Exception;
 
 class PHPImageOptim
 {
@@ -19,10 +18,10 @@ class PHPImageOptim
 
     /**
      * @param string $imagePath
-     * @return $this
+     * @return PHPImageOptim
      * @throws Exception
      */
-    public function setImage(string $imagePath = '')
+    public function setImage(string $imagePath = ''): PHPImageOptim
     {
         if (!file_exists($imagePath)) {
             throw new Exception('Image doesn\'t exist.');
@@ -33,21 +32,19 @@ class PHPImageOptim
     }
 
     /**
-     * @param ToolsInterface $object
-     * @return $this
+     * @param $object
+     * @return PHPImageOptim
      */
-    public function chainCommand(ToolsInterface $object)
+    public function chainCommand($object): PHPImageOptim
     {
         $this->chainedCommands[] = $object;
         return $this;
     }
 
     /**
-     * Starts the optimisation process
-     *
      * @return bool
      */
-    public function optimise()
+    public function optimise(): bool
     {
         foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->determinePreOptimisedFileSize();

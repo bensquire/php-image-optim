@@ -8,13 +8,16 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class Guetzli extends Common implements ToolsInterface
 {
+    /**
+     * @var string
+     */
     private $attributes = '';
 
     /**
      * Guetzli constructor.
      * @param array $options
      */
-    public function __construct($options = ['quality' => 85])
+    public function __construct(array $options = ['quality' => 85])
     {
         $arguments = [];
 
@@ -26,10 +29,10 @@ class Guetzli extends Common implements ToolsInterface
     }
 
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
         exec(
             sprintf(
