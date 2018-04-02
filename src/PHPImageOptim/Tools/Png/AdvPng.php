@@ -9,10 +9,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 class AdvPng extends Common implements ToolsInterface
 {
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
         exec($this->binaryPath . ' -z -4 -i20 -- ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {

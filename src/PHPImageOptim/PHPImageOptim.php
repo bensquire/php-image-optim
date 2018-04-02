@@ -12,19 +12,16 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var array 
+     * @var array
      */
-    protected $chainedCommands = array();
+    protected $chainedCommands = [];
 
     /**
-     * Sets the path of the image we want to minify
-     *
      * @param string $imagePath
-     *
-     * @return $this
+     * @return PHPImageOptim
      * @throws Exception
      */
-    public function setImage($imagePath = '')
+    public function setImage(string $imagePath = ''): PHPImageOptim
     {
         if (!file_exists($imagePath)) {
             throw new Exception('Image doesn\'t exist.');
@@ -35,24 +32,19 @@ class PHPImageOptim
     }
 
     /**
-     * Adds a command to perform optimisation against
-     *
      * @param $object
-     *
-     * @return $this
+     * @return PHPImageOptim
      */
-    public function chainCommand($object)
+    public function chainCommand($object): PHPImageOptim
     {
         $this->chainedCommands[] = $object;
         return $this;
     }
 
     /**
-     * Starts the optimisation process
-     *
      * @return bool
      */
-    public function optimise()
+    public function optimise(): bool
     {
         foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->determinePreOptimisedFileSize();

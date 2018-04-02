@@ -3,7 +3,7 @@
 
 $finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
-    ->in(__DIR__);
+    ->in([__DIR__ . '/src']);
 
 return PhpCsFixer\Config::create()
     ->setUsingCache(false)      //Remove for performance improvements
@@ -11,6 +11,8 @@ return PhpCsFixer\Config::create()
     ->setRules([
         '@PSR2' => true,
         'psr4' => true,
+        '@PHP71Migration' => true,
+        'array_syntax' => ['syntax' => 'short'],
         'no_short_echo_tag' => true,
         'no_unused_imports' => true,
         'ordered_imports' => true,

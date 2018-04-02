@@ -14,7 +14,7 @@ class MozJpeg extends Common implements ToolsInterface
      * MozJpeg constructor.
      * @param array $options
      */
-    public function __construct($options = ['quality' => 85])
+    public function __construct(array $options = ['quality' => 85])
     {
         $arguments = [];
 
@@ -26,10 +26,10 @@ class MozJpeg extends Common implements ToolsInterface
     }
 
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'PHPImageOptim');
         $command = sprintf(

@@ -3,11 +3,11 @@ namespace PHPImageOptim\Tools;
 
 interface ToolsInterface
 {
-    const OPTIMISATION_LEVEL_BASIC = 1;
-    const OPTIMISATION_LEVEL_STANDARD = 2;
-    const OPTIMISATION_LEVEL_EXTREME = 3;
+    public const OPTIMISATION_LEVEL_BASIC = 1;
+    public const OPTIMISATION_LEVEL_STANDARD = 2;
+    public const OPTIMISATION_LEVEL_EXTREME = 3;
 
-    public function optimise();
+    public function optimise(): ToolsInterface;
 
     public function setBinaryPath($binaryPath);
 

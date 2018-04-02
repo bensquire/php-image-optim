@@ -18,9 +18,9 @@ $pngQuant->setBinaryPath('/usr/local/bin/pngquant');
 
 $optim = new \PHPImageOptim\PHPImageOptim();
 $optim->setImage('./tests/image/lenna-original.png');
-$optim->chainCommand($pngQuant)
-    ->chainCommand($advPng)
-    ->chainCommand($optiPng)
-    ->chainCommand($pngCrush)
-    ->chainCommand($pngOut);
+$optim->chainCommand($pngQuant);
+$optim->chainCommand($advPng);
+$optim->chainCommand($optiPng);
+$optim->chainCommand($pngCrush);
+$optim->chainCommand($pngOut);
 $optim->optimise();

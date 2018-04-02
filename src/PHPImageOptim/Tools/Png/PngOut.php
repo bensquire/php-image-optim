@@ -9,10 +9,10 @@ use PHPImageOptim\Tools\ToolsInterface;
 class PngOut extends Common implements ToolsInterface
 {
     /**
-     * @return $this
+     * @return ToolsInterface
      * @throws Exception
      */
-    public function optimise()
+    public function optimise(): ToolsInterface
     {
         exec($this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . escapeshellarg($this->imagePath) . ' ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
 
