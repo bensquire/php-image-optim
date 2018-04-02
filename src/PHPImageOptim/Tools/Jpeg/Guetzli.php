@@ -35,7 +35,7 @@ class Guetzli extends Common implements ToolsInterface
         );
 
         if ($iResult !== 0) {
-            throw new Exception('MozJpeg was unable to optimise image.');
+            throw new Exception('Guetzli was unable to optimise image.');
         }
         return $this;
     }
