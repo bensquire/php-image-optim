@@ -16,7 +16,7 @@ class JpegTran extends Common implements ToolsInterface
     {
         exec($this->binaryPath . ' -optimize ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {
-            throw new Exception('JPEGTRAN was unable  to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+            throw new Exception('JPEGTRAN was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
