@@ -16,7 +16,7 @@ class JpegOptim extends Common implements ToolsInterface
     {
         exec($this->binaryPath . ' --strip-all --all-progressive ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {
-            throw new Exception('JpegOptim was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+            throw new Exception('JPEGOPTIM was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
