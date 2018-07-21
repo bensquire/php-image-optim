@@ -16,7 +16,7 @@ class Gifsicle extends Common implements ToolsInterface
     {
         exec($this->binaryPath . ' -b -O2 ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {
-            throw new Exception('Gifsicle was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+            throw new Exception('GIFSICLE was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
         return $this;

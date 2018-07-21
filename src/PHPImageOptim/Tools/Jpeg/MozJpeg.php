@@ -48,7 +48,7 @@ class MozJpeg extends Common implements ToolsInterface
         rename($tempFile, $this->imagePath);
 
         if ($iResult !== 0) {
-            throw new Exception('MozJpeg was unable to optimise image.');
+            throw new Exception('MOZJPEG was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
         return $this;
     }

@@ -16,7 +16,7 @@ class PngQuant extends Common implements ToolsInterface
     {
         exec($this->binaryPath . ' --speed 1 --ext=.png --force ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
         if ($iResult !== 0) {
-            throw new Exception('PNGOUT was Unable to optimise image, result:' . $iResult . ' File: ' . $this->binaryPath);
+            throw new Exception('PNGQUANT was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
