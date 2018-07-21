@@ -46,7 +46,7 @@ class Guetzli extends Common implements ToolsInterface
         );
 
         if ($iResult !== 0) {
-            throw new Exception('Guetzli was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+            throw new Exception('GUETZLI was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
         return $this;
     }
