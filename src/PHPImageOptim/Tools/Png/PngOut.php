@@ -20,7 +20,7 @@ class PngOut extends Common implements ToolsInterface
             return $this;
         }
 
-        if ($iResult !== 0) {
+        if ($this->stopIfFail && $iResult !== 0) {
             throw new Exception('PNGOUT was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
