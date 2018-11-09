@@ -12,6 +12,7 @@ class Common
     protected $originalFileSize = '';
     protected $finalFileSize = '';
     protected $optimisationLevel = 1;
+    protected $stopIfFail = true;
 
     /**
      * @param string $binaryPath
