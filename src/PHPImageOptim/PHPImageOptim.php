@@ -12,6 +12,11 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
+     * @var boolean
+     */
+    protected $stopIfFail = true;
+
+    /**
      * @var array
      */
     protected $chainedCommands = [];
@@ -44,8 +49,10 @@ class PHPImageOptim
     /**
      * @return bool
      */
-    public function optimise(): bool
+    public function optimise($stopIfFail = true): bool
     {
+        $this->stopIfFail = $stopIfFail;
+        
         foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->setImagePath($this->imagePath);
