@@ -12,11 +12,6 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var boolean
-     */
-    protected $stopIfFail = true;
-
-    /**
      * @var array
      */
     protected $chainedCommands = [];
