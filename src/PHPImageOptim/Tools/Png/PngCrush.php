@@ -24,7 +24,7 @@ class PngCrush extends Common implements ToolsInterface
         // Switch back to previous directory
         chdir($prevDir);
 
-        if ($iResult != 0) {
+        if ($this->stopIfFail && $iResult != 0) {
             throw new Exception('PNGCRUSH was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
         }
 
