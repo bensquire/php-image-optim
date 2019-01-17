@@ -35,8 +35,9 @@ class PHPImageOptim
      * @param $object
      * @return PHPImageOptim
      */
-    public function chainCommand($object): PHPImageOptim
+    public function chainCommand($object, $stopIfFail = true): PHPImageOptim
     {
+        $object->setStopIfFail($stopIfFail);
         $this->chainedCommands[] = $object;
         return $this;
     }
@@ -44,10 +45,8 @@ class PHPImageOptim
     /**
      * @return bool
      */
-    public function optimise($stopIfFail = true): bool
+    public function optimise(): bool
     {
-        $this->stopIfFail = $stopIfFail;
-        
         foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->setImagePath($this->imagePath);
