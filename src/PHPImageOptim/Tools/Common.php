@@ -30,6 +30,17 @@ class Common
     }
 
     /**
+     * @param string $stopIfFail
+     * @return $this
+     * @throws Exception
+     */
+    public function setStopIfFail($stopIfFail)
+    {
+        $this->stopIfFail = boolval($stopIfFail);
+        return $this;
+    }
+
+    /**
      * @param $imagePath
      * @return $this
      * @throws Exception
