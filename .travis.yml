@@ -4,9 +4,14 @@ dist: trusty
 php:
   - "7.1"
   - "7.2"
+  - "7.3"
 
 before_install:
   - composer self-update
   - composer install --dev --no-interaction --prefer-source
 
-script: vendor/bin/phpunit
+jobs:
+  include:
+    - script: ./vendor/bin/php-cs-fixer fix . --dry-run --stop-on-violation
+    - script: ./vendor/bin/phpstan analyse ./src --level=max
+    - script: ./vendor/bin/phpunit
