@@ -7,17 +7,32 @@ interface ToolsInterface
     public const OPTIMISATION_LEVEL_STANDARD = 2;
     public const OPTIMISATION_LEVEL_EXTREME = 3;
 
+    /**
+     * @return ToolsInterface
+     */
     public function optimise(): ToolsInterface;
 
-    public function setBinaryPath($binaryPath);
+    /**
+     * @param string $binaryPath
+     * @return mixed
+     */
+    public function setBinaryPath(string $binaryPath);
 
     public function checkVersion();
 
-    public function setImagePath($imagePath);
+    /**
+     * @param string $imagePath
+     * @return mixed
+     */
+    public function setImagePath(string $imagePath);
 
     public function determinePreOptimisedFileSize();
 
     public function determinePostOptimisedFileSize();
 
-    public function setOptimisationLevel($level = 2);
+    /**
+     * @param int $level
+     * @return mixed
+     */
+    public function setOptimisationLevel(int $level = 2);
 }

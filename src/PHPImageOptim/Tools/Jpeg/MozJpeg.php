@@ -8,6 +8,9 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class MozJpeg extends Common implements ToolsInterface
 {
+    /**
+     * @var string
+     */
     private $attributes = '';
 
     /**
@@ -32,6 +35,11 @@ class MozJpeg extends Common implements ToolsInterface
     public function optimise(): ToolsInterface
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'PHPImageOptim');
+
+        if ($tempFile === false) {
+            throw new Exception('Unable to create temp file for PHPImageOptim');
+        }
+
         $command = sprintf(
             $this->binaryPath . ' %s -outfile %s %s',
             $this->attributes,
@@ -39,17 +47,14 @@ class MozJpeg extends Common implements ToolsInterface
             escapeshellarg($this->imagePath)
         );
 
-        exec(
-            $command,
-            $aOutput,
-            $iResult
-        );
+        exec($command, $output, $result);
 
         rename($tempFile, $this->imagePath);
 
-        if ($this->stopIfFail && $iResult !== 0) {
-            throw new Exception('MOZJPEG was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+        if ($this->stopIfFail && $result !== 0) {
+            throw new Exception('MOZJPEG was unable to optimise image, result:' . $result . ' File: ' . $this->imagePath);
         }
+
         return $this;
     }
 

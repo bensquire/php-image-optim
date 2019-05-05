@@ -6,12 +6,39 @@ use Exception;
 
 class Common
 {
+    /**
+     * @var string
+     */
     protected $binaryPath = '';
+
+    /**
+     * @var string
+     */
     protected $imagePath = '';
+
+    /**
+     * @var string
+     */
     protected $outputPath = '';
-    protected $originalFileSize = '';
-    protected $finalFileSize = '';
+
+    /**
+     * @var int
+     */
+    protected $originalFileSize = 0;
+
+    /**
+     * @var int
+     */
+    protected $finalFileSize = 0;
+
+    /**
+     * @var int
+     */
     protected $optimisationLevel = 1;
+
+    /**
+     * @var bool
+     */
     protected $stopIfFail = true;
 
     /**
@@ -19,7 +46,7 @@ class Common
      * @return $this
      * @throws Exception
      */
-    public function setBinaryPath($binaryPath = '')
+    public function setBinaryPath(string $binaryPath = ''): Common
     {
         if (!file_exists($binaryPath)) {
             throw new Exception('Unable to locate binary file');
@@ -30,22 +57,21 @@ class Common
     }
 
     /**
-     * @param string $stopIfFail
+     * @param bool $stopIfFail
      * @return $this
-     * @throws Exception
      */
-    public function setStopIfFail($stopIfFail)
+    public function setStopIfFail(bool $stopIfFail): Common
     {
-        $this->stopIfFail = boolval($stopIfFail);
+        $this->stopIfFail = $stopIfFail;
         return $this;
     }
 
     /**
-     * @param $imagePath
-     * @return $this
+     * @param string $imagePath
+     * @return Common
      * @throws Exception
      */
-    public function setImagePath($imagePath)
+    public function setImagePath(string $imagePath): Common
     {
         if (!file_exists($imagePath)) {
             throw new Exception('Invald image path');
@@ -64,7 +90,7 @@ class Common
      * @return $this
      * @throws Exception
      */
-    public function setOptimisationLevel($level = 2)
+    public function setOptimisationLevel(int $level = 2): Common
     {
         if (!is_int($level)) {
             throw new Exception('Invalid Optimisation Level');
@@ -82,20 +108,34 @@ class Common
     }
 
     /**
-     * @return $this
+     * @return Common
+     * @throws Exception
      */
-    public function determinePreOptimisedFileSize()
+    public function determinePreOptimisedFileSize(): Common
     {
-        $this->originalFileSize = filesize($this->imagePath);
+        $fileSize = filesize($this->imagePath);
+
+        if ($fileSize === false) {
+            throw new \Exception('Unable to determine pre-optimised fileSize');
+        }
+
+        $this->originalFileSize = $fileSize;
         return $this;
     }
 
     /**
-     * @return $this
+     * @return Common
+     * @throws Exception
      */
-    public function determinePostOptimisedFileSize()
+    public function determinePostOptimisedFileSize(): Common
     {
-        $this->finalFileSize = filesize($this->imagePath);
+        $fileSize = filesize($this->imagePath);
+
+        if ($fileSize === false) {
+            throw new \Exception('Unable to determine post-optimised fileSize');
+        }
+
+        $this->finalFileSize = $fileSize;
         return $this;
     }
 }

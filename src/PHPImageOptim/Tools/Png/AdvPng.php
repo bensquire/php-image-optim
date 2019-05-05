@@ -14,9 +14,14 @@ class AdvPng extends Common implements ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
-        exec($this->binaryPath . ' -z -4 -i20 -- ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
-        if ($this->stopIfFail && $iResult !== 0) {
-            throw new Exception('ADVPNG was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+        exec(
+            $this->binaryPath . ' -z -4 -i20 -- ' . escapeshellarg($this->imagePath),
+            $output,
+            $result
+        );
+
+        if ($this->stopIfFail && $result !== 0) {
+            throw new Exception('ADVPNG was unable to optimise image, result:' . $result . ' File: ' . $this->imagePath);
         }
 
         return $this;

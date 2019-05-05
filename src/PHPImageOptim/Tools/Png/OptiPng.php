@@ -14,9 +14,14 @@ class OptiPng extends Common implements ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
-        exec($this->binaryPath . ' -i0 -o7 -zm1-9 ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
-        if ($this->stopIfFail && $iResult !== 0) {
-            throw new Exception('OPTIPNG was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+        exec(
+            $this->binaryPath . ' -i0 -o7 -zm1-9 ' . escapeshellarg($this->imagePath),
+            $output,
+            $optimResult
+        );
+
+        if ($this->stopIfFail && $optimResult !== 0) {
+            throw new Exception('OPTIPNG was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
 
         return $this;

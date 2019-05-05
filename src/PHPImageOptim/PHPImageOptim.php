@@ -32,10 +32,11 @@ class PHPImageOptim
     }
 
     /**
-     * @param $object
+     * @param mixed $object
+     * @param bool $stopIfFail
      * @return PHPImageOptim
      */
-    public function chainCommand($object, $stopIfFail = true): PHPImageOptim
+    public function chainCommand($object, bool $stopIfFail = true): PHPImageOptim
     {
         $object->setStopIfFail($stopIfFail);
         $this->chainedCommands[] = $object;

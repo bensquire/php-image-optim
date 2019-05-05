@@ -14,14 +14,18 @@ class PngOut extends Common implements ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
-        exec($this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . escapeshellarg($this->imagePath) . ' ' . escapeshellarg($this->imagePath), $aOutput, $iResult);
+        exec(
+            $this->binaryPath . ' ' . $this->getOptimisationLevel() . ' -q -y ' . escapeshellarg($this->imagePath) . ' ' . escapeshellarg($this->imagePath),
+            $output,
+            $optimResult
+        );
 
-        if ($iResult === 2) {
+        if ($optimResult === 2) {
             return $this;
         }
 
-        if ($this->stopIfFail && $iResult !== 0) {
-            throw new Exception('PNGOUT was unable to optimise image, result:' . $iResult . ' File: ' . $this->imagePath);
+        if ($this->stopIfFail && $optimResult !== 0) {
+            throw new Exception('PNGOUT was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
