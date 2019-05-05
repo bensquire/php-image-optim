@@ -52,7 +52,16 @@ This example demonstrates the optimisation of a PNG file, by chaining several co
 ```
 
 ## Fix common coding inconsistencies
-
 ```console
-    ./vendor/bin/php-cs-fixer fix .
+    composer php-cs-fixer
+```
+
+## Find coding issues
+```console
+    composer php-stan
+```
+
+## Run unit tests
+```console
+    composer tests
 ```
