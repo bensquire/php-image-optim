@@ -17,15 +17,21 @@
         "wiki": "https://github.com/bensquire/php-image-optim/wiki"
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "5.*",
-        "friendsofphp/php-cs-fixer": "^2.11"
+        "phpunit/phpunit": "7.*",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpstan/phpstan": "^0.11.5"
     },
     "autoload": {
         "psr-4": {
             "PHPImageOptim\\": "src/PHPImageOptim"
         }
+    },
+    "scripts": {
+        "php-cs-fixer": "./vendor/bin/php-cs-fixer fix .",
+        "php-stan": "./vendor/bin/phpstan analyse ./src --level=max",
+        "tests": "./vendor/bin/phpunit"
     }
 }
