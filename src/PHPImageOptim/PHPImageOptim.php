@@ -49,8 +49,8 @@ class PHPImageOptim
     public function optimise(): bool
     {
         foreach ($this->chainedCommands as $chainedCommand) {
-            $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->setImagePath($this->imagePath);
+            $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->optimise();
             $chainedCommand->determinePostOptimisedFileSize();
         }
