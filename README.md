@@ -48,8 +48,14 @@ $tool->setBinaryPath('/usr/local/opt/mozjpeg/bin/jpegtran');
 This example demonstrates the optimisation of a PNG file, by chaining several commands together.
 
 ```php
-use PHPImageOptim\Tools\Png\AdvPng;use PHPImageOptim\Tools\Png\OptiPng;use PHPImageOptim\Tools\Png\PngCrush;use PHPImageOptim\Tools\Png\PngOut;use PHPImageOptim\Tools\Png\PngQuant;<?php
+<?php
     include('./vendor/autoload.php');
+
+    use PHPImageOptim\Tools\Png\AdvPng;
+    use PHPImageOptim\Tools\Png\OptiPng;
+    use PHPImageOptim\Tools\Png\PngCrush;
+    use PHPImageOptim\Tools\Png\PngOut;
+    use PHPImageOptim\Tools\Png\PngQuant;
 
     $advPng = new AdvPng();
     $advPng->setBinaryPath('/usr/local/bin/advpng');
