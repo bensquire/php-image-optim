@@ -9,6 +9,7 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@PHP71Migration:risky' => true,
+        '@PHP71Migration' => true,
 
         '@PSR2' => true,
         'psr4' => true,

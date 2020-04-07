@@ -60,7 +60,7 @@ class PHPImageOptim
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function getVersions(): array
     {
