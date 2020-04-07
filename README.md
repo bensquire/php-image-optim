@@ -35,7 +35,7 @@ brew install svgo # Future
 It's worth noting that mozJpeg is a fork of libjpeg-turbo and as such isn't a binary with it's own name, for example to use it in this library:
 
 ```php
-use PHPImageOptim\Tools\Jpeg\MozJpeg;$tool = new MozJpeg();
+$tool = new \PHPImageOptim\Tools\Jpeg\MozJpeg();
 $tool->setBinaryPath('/usr/local/opt/mozjpeg/bin/jpegtran');
 ```
 
