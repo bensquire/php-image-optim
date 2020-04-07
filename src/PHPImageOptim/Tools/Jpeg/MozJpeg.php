@@ -72,7 +72,7 @@ class MozJpeg extends Common implements ToolsInterface
         }
 
         $versionMatches = [];
-        preg_match('/version ([0-9\.]{1,}[\w]) /m', $output[0], $versionMatches);
+        preg_match('/version ([0-9.]+[\w]) /m', $output[0], $versionMatches);
 
         return $versionMatches[1];
     }
