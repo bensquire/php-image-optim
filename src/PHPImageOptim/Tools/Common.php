@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools;
 
@@ -39,16 +39,16 @@ class Common
     /**
      * @var bool
      */
-    protected $stopIfFail = true;
+    protected $stopOnFailure = true;
 
     /**
      * @param string $binaryPath
-     * @return $this
      * @throws Exception
+     * @return $this
      */
     public function setBinaryPath(string $binaryPath = ''): Common
     {
-        if (!file_exists($binaryPath)) {
+        if (false === file_exists($binaryPath)) {
             throw new Exception('Unable to locate binary file');
         }
 
@@ -57,27 +57,27 @@ class Common
     }
 
     /**
-     * @param bool $stopIfFail
+     * @param bool $stopOnFailure
      * @return $this
      */
-    public function setStopIfFail(bool $stopIfFail): Common
+    public function setStopOnFailure(bool $stopOnFailure): Common
     {
-        $this->stopIfFail = $stopIfFail;
+        $this->stopOnFailure = $stopOnFailure;
         return $this;
     }
 
     /**
      * @param string $imagePath
-     * @return Common
      * @throws Exception
+     * @return Common
      */
     public function setImagePath(string $imagePath): Common
     {
-        if (!file_exists($imagePath)) {
+        if (false === file_exists($imagePath)) {
             throw new Exception('Invald image path');
         }
 
-        if (!is_readable($imagePath)) {
+        if (false === is_readable($imagePath)) {
             throw new Exception('The file cannot be read');
         }
 
@@ -87,18 +87,14 @@ class Common
 
     /**
      * @param int $level
-     * @return $this
      * @throws Exception
+     * @return $this
      */
     public function setOptimisationLevel(int $level = 2): Common
     {
-        if (!is_int($level)) {
-            throw new Exception('Invalid Optimisation Level');
-        }
-
-        if ($level !== ToolsInterface::OPTIMISATION_LEVEL_BASIC &&
-            $level !== ToolsInterface::OPTIMISATION_LEVEL_STANDARD &&
-            $level !== ToolsInterface::OPTIMISATION_LEVEL_EXTREME
+        if (ToolsInterface::OPTIMISATION_LEVEL_BASIC !== $level &&
+            ToolsInterface::OPTIMISATION_LEVEL_STANDARD !== $level &&
+            ToolsInterface::OPTIMISATION_LEVEL_EXTREME !== $level
         ) {
             throw new Exception('Invalid Optimisation level');
         }
@@ -108,15 +104,15 @@ class Common
     }
 
     /**
-     * @return Common
      * @throws Exception
+     * @return Common
      */
     public function determinePreOptimisedFileSize(): Common
     {
         $fileSize = filesize($this->imagePath);
 
-        if ($fileSize === false) {
-            throw new \Exception('Unable to determine pre-optimised fileSize');
+        if (false === $fileSize) {
+            throw new Exception('Unable to determine pre-optimised fileSize');
         }
 
         $this->originalFileSize = $fileSize;
@@ -124,15 +120,15 @@ class Common
     }
 
     /**
-     * @return Common
      * @throws Exception
+     * @return Common
      */
     public function determinePostOptimisedFileSize(): Common
     {
         $fileSize = filesize($this->imagePath);
 
-        if ($fileSize === false) {
-            throw new \Exception('Unable to determine post-optimised fileSize');
+        if (false === $fileSize) {
+            throw new Exception('Unable to determine post-optimised fileSize');
         }
 
         $this->finalFileSize = $fileSize;

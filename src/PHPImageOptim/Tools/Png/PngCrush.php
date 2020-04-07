@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Png;
 
@@ -9,44 +9,58 @@ use PHPImageOptim\Tools\ToolsInterface;
 class PngCrush extends Common implements ToolsInterface
 {
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
         $absoluteImagePath = realpath($this->imagePath);
-        if ($absoluteImagePath === false) {
-            throw new \Exception('Unable to escape PngCrush image path');
+        if (false === $absoluteImagePath) {
+            throw new Exception('Unable to escape PngCrush image path');
         }
 
         // Write file to temporary location
         $currentDirectory = getcwd();
-        if ($currentDirectory === false) {
-            throw new \Exception('Unable to get current working folder');
+        if (false === $currentDirectory) {
+            throw new Exception('Unable to get current working folder');
         }
 
         chdir(sys_get_temp_dir());
 
         exec(
             $this->binaryPath . ' -rem gAMA -rem cHRM -rem iCCP -rem sRGB -brute -q -l 9 -reduce -ow ' . escapeshellarg($absoluteImagePath),
-            $aOutput,
+            $output,
             $optimResult
         );
 
         // Switch back to previous directory
-        if (chdir($currentDirectory) === false) {
-            throw new \Exception('Unable to change folder');
+        if (false === chdir($currentDirectory)) {
+            throw new Exception('Unable to change folder');
         }
 
-        if ($this->stopIfFail && $optimResult != 0) {
+        if (true === $this->stopOnFailure && 0 !== $optimResult) {
             throw new Exception('PNGCRUSH was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
     }
 
-    public function checkVersion()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-        exec($this->binaryPath . ' --version', $aOutput, $iResult);
+        $output = [];
+        exec($this->binaryPath . ' --version 2>&1', $output, $result);
+
+        if (0 !== $result) {
+            throw new Exception('Unable to determine version, error code: ' . $result);
+        }
+
+        $versionMatches = [];
+        preg_match('/pngcrush ([0-9]+.[0-9]+.[0-9]+)/m', $output[0], $versionMatches);
+
+        return $versionMatches[1];
     }
 }

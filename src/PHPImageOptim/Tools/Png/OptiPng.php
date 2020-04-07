@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Png;
 
@@ -9,8 +9,8 @@ use PHPImageOptim\Tools\ToolsInterface;
 class OptiPng extends Common implements ToolsInterface
 {
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
@@ -20,15 +20,29 @@ class OptiPng extends Common implements ToolsInterface
             $optimResult
         );
 
-        if ($this->stopIfFail && $optimResult !== 0) {
+        if (true === $this->stopOnFailure && 0 !== $optimResult) {
             throw new Exception('OPTIPNG was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
 
         return $this;
     }
 
-    public function checkVersion()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-        exec($this->binaryPath . ' --version', $aOutput, $iResult);
+        $output = [];
+        exec($this->binaryPath . ' --version', $output, $result);
+
+        if (0 !== $result) {
+            throw new Exception('Unable to determine version, error code: ' . $result);
+        }
+
+        $versionMatches = [];
+        preg_match('/OptiPNG version ([0-9]+.[0-9]+.[0-9]+)/m', $output[0], $versionMatches);
+
+        return $versionMatches[1];
     }
 }

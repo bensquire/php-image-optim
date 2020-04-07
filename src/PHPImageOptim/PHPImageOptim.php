@@ -1,8 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim;
 
 use Exception;
+use PHPImageOptim\Tools\ToolsInterface;
 
 class PHPImageOptim
 {
@@ -12,18 +13,18 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var array
+     * @var ToolsInterface[]
      */
     protected $chainedCommands = [];
 
     /**
      * @param string $imagePath
-     * @return PHPImageOptim
      * @throws Exception
+     * @return PHPImageOptim
      */
     public function setImage(string $imagePath = ''): PHPImageOptim
     {
-        if (!file_exists($imagePath)) {
+        if (false === file_exists($imagePath)) {
             throw new Exception('Image doesn\'t exist.');
         }
 
@@ -38,7 +39,7 @@ class PHPImageOptim
      */
     public function chainCommand($object, bool $stopIfFail = true): PHPImageOptim
     {
-        $object->setStopIfFail($stopIfFail);
+        $object->setStopOnFailure($stopIfFail);
         $this->chainedCommands[] = $object;
         return $this;
     }
@@ -56,5 +57,18 @@ class PHPImageOptim
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getVersions(): array
+    {
+        $versions = [];
+        foreach ($this->chainedCommands as $chainedCommand) {
+            $versions[get_class($chainedCommand)] = $chainedCommand->getVersion();
+        }
+
+        return $versions;
     }
 }

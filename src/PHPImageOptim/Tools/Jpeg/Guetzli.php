@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Jpeg;
 
@@ -11,11 +11,11 @@ class Guetzli extends Common implements ToolsInterface
     /**
      * @var string
      */
-    private $attributes = '';
+    private $attributes;
 
     /**
      * Guetzli constructor.
-     * @param array $options
+     * @param array<string, mixed> $options
      */
     public function __construct(array $options = ['quality' => 85])
     {
@@ -29,8 +29,8 @@ class Guetzli extends Common implements ToolsInterface
     }
 
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
@@ -45,14 +45,18 @@ class Guetzli extends Common implements ToolsInterface
             $optimResult
         );
 
-        if ($this->stopIfFail && $optimResult !== 0) {
+        if (true === $this->stopOnFailure && 0 !== $optimResult) {
             throw new Exception('GUETZLI was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
         return $this;
     }
 
-    public function checkVersion()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-        exec($this->binaryPath . ' --version', $aOutput, $iResult);
+        throw new Exception('Unable to determine version, CLI doesnt provide this.');
     }
 }

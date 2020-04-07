@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Png;
 
@@ -9,8 +9,8 @@ use PHPImageOptim\Tools\ToolsInterface;
 class AdvPng extends Common implements ToolsInterface
 {
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
@@ -20,23 +20,29 @@ class AdvPng extends Common implements ToolsInterface
             $result
         );
 
-        if ($this->stopIfFail && $result !== 0) {
+        if (true === $this->stopOnFailure && 0 !== $result) {
             throw new Exception('ADVPNG was unable to optimise image, result:' . $result . ' File: ' . $this->imagePath);
         }
 
         return $this;
     }
 
-    public function optimiseStandard()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-    }
+        $output = [];
+        exec($this->binaryPath . ' --version', $output, $result);
 
-    public function optimiseExtreme()
-    {
-    }
+        if (0 !== $result) {
+            throw new Exception('Unable to determine version, error code: ' . $result);
+        }
 
-    public function checkVersion()
-    {
-        exec($this->binaryPath . ' --version', $aOutput, $iResult);
+        $versionMatches = [];
+        preg_match('/advancecomp v([0-9]+.[0-9]+)/m', $output[0], $versionMatches);
+
+        return $versionMatches[1];
     }
 }

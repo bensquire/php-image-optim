@@ -1,22 +1,32 @@
-<?php
+#!/usr/bin/php
+<?php declare(strict_types=1);
+
+use PHPImageOptim\PHPImageOptim;
+use PHPImageOptim\Tools\Png\AdvPng;
+use PHPImageOptim\Tools\Png\OptiPng;
+use PHPImageOptim\Tools\Png\PngCrush;
+use PHPImageOptim\Tools\Png\PngOut;
+use PHPImageOptim\Tools\Png\PngQuant;
+
 include('./vendor/autoload.php');
 
-$advPng = new \PHPImageOptim\Tools\Png\AdvPng();
+$advPng = new AdvPng();
 $advPng->setBinaryPath('/usr/local/bin/advpng');
+$advPng->getVersion();        // Optional, for demonstration purposes
 
-$optiPng = new \PHPImageOptim\Tools\Png\OptiPng();
+$optiPng = new OptiPng();
 $optiPng->setBinaryPath('/usr/local/bin/optipng');
 
-$pngOut = new \PHPImageOptim\Tools\Png\PngOut();
-$pngOut->setBinaryPath('/usr/local/bin/pngout');
-
-$pngCrush = new \PHPImageOptim\Tools\Png\PngCrush();
+$pngCrush = new PngCrush();
 $pngCrush->setBinaryPath('/usr/local/bin/pngcrush');
 
-$pngQuant = new \PHPImageOptim\Tools\Png\PngQuant();
+$pngOut = new PngOut();
+$pngOut->setBinaryPath('/usr/local/bin/pngout');
+
+$pngQuant = new PngQuant();
 $pngQuant->setBinaryPath('/usr/local/bin/pngquant');
 
-$optim = new \PHPImageOptim\PHPImageOptim();
+$optim = new PHPImageOptim();
 $optim->setImage('./tests/image/lenna-original.png');
 $optim->chainCommand($pngQuant);
 $optim->chainCommand($advPng);

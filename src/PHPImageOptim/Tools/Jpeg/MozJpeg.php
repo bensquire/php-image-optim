@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Jpeg;
 
@@ -11,11 +11,11 @@ class MozJpeg extends Common implements ToolsInterface
     /**
      * @var string
      */
-    private $attributes = '';
+    private $attributes;
 
     /**
      * MozJpeg constructor.
-     * @param array $options
+     * @param array<string, mixed> $options
      */
     public function __construct(array $options = ['quality' => 85])
     {
@@ -29,14 +29,14 @@ class MozJpeg extends Common implements ToolsInterface
     }
 
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
         $tempFile = tempnam(sys_get_temp_dir(), 'PHPImageOptim');
 
-        if ($tempFile === false) {
+        if (false === $tempFile) {
             throw new Exception('Unable to create temp file for PHPImageOptim');
         }
 
@@ -51,15 +51,29 @@ class MozJpeg extends Common implements ToolsInterface
 
         rename($tempFile, $this->imagePath);
 
-        if ($this->stopIfFail && $result !== 0) {
+        if (true === $this->stopOnFailure && 0 !== $result) {
             throw new Exception('MOZJPEG was unable to optimise image, result:' . $result . ' File: ' . $this->imagePath);
         }
 
         return $this;
     }
 
-    public function checkVersion()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-        exec($this->binaryPath . ' --version', $aOutput, $iResult);
+        $output = [];
+        exec($this->binaryPath . ' -v -q 2>&1', $output, $result);
+
+        if (false === in_array($result, [0, 1], true)) {
+            throw new Exception('Unable to determine version, error code: ' . $result);
+        }
+
+        $versionMatches = [];
+        preg_match('/version ([0-9\.]{1,}[\w]) /m', $output[0], $versionMatches);
+
+        return $versionMatches[1];
     }
 }

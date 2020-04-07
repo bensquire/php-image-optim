@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace PHPImageOptim\Tools\Png;
 
@@ -9,8 +9,8 @@ use PHPImageOptim\Tools\ToolsInterface;
 class PngOut extends Common implements ToolsInterface
 {
     /**
-     * @return ToolsInterface
      * @throws Exception
+     * @return ToolsInterface
      */
     public function optimise(): ToolsInterface
     {
@@ -20,11 +20,11 @@ class PngOut extends Common implements ToolsInterface
             $optimResult
         );
 
-        if ($optimResult === 2) {
+        if (2 === $optimResult) {
             return $this;
         }
 
-        if ($this->stopIfFail && $optimResult !== 0) {
+        if (true === $this->stopOnFailure && 0 !== $optimResult) {
             throw new Exception('PNGOUT was unable to optimise image, result:' . $optimResult . ' File: ' . $this->imagePath);
         }
 
@@ -34,31 +34,39 @@ class PngOut extends Common implements ToolsInterface
     /**
      * Returns the optimisation level
      *
+     * @throws Exception
      * @return string
-     * @throws \Exception
      */
     public function getOptimisationLevel()
     {
         switch ($this->optimisationLevel) {
             case 1:
                 return '-s3';
-                break;
-
             case 2:
                 return '-s2';
-                break;
-
             case 3:
                 return '-s1';
-                break;
-
             default:
                 throw new Exception('Unable to calculate optimisation level');
         }
     }
 
-    public function checkVersion()
+    /**
+     * @throws Exception
+     * @return string
+     */
+    public function getVersion(): string
     {
-        exec($this->binaryPath, $aOutput, $iResult);
+        $output = [];
+        exec($this->binaryPath . ' 2>&1', $output, $result);
+
+        if (false === in_array($result, [0, 1], true)) {
+            throw new Exception('Unable to determine version, error code: ' . $result);
+        }
+
+        $versionMatches = [];
+        preg_match('/([\w]{3,4} [0-9]{1,2} [0-9]{4})$/', $output[0], $versionMatches);
+
+        return $versionMatches[1];
     }
 }

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace PHPImageOptim\Tools;
 
 interface ToolsInterface
@@ -18,7 +18,10 @@ interface ToolsInterface
      */
     public function setBinaryPath(string $binaryPath);
 
-    public function checkVersion();
+    /**
+     * @return string
+     */
+    public function getVersion(): string;
 
     /**
      * @param string $imagePath
@@ -26,8 +29,16 @@ interface ToolsInterface
      */
     public function setImagePath(string $imagePath);
 
+    /**
+     * TODO: Remove this?
+     * @return mixed
+     */
     public function determinePreOptimisedFileSize();
 
+    /**
+     * TODO: Remove this?
+     * @return mixed
+     */
     public function determinePostOptimisedFileSize();
 
     /**
