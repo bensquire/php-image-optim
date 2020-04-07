@@ -7,12 +7,8 @@ The purpose of this library is to help automate the optimisation of images via t
 ### Library
 The library is PSR-4 compliant and the simplest way to install it is via composer, simply add:
 
-```json
-    {
-        "require": {
-            "bensquire/php-image-optim": "dev-master"
-        }
-    }
+```
+composer require bensquire/php-image-optim
 ```
 
 into your composer.json, then run 'composer install' or 'composer update' as required.
