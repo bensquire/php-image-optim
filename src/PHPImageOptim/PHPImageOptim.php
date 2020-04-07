@@ -33,15 +33,30 @@ class PHPImageOptim
     }
 
     /**
-     * @param mixed $object
+     * @param ToolsInterface $object
      * @param bool $stopIfFail
      * @return PHPImageOptim
      */
-    public function chainCommand($object, bool $stopIfFail = true): PHPImageOptim
+    public function chainCommand(ToolsInterface $object, bool $stopIfFail = true): PHPImageOptim
     {
         $object->setStopOnFailure($stopIfFail);
-        $this->chainedCommands[] = $object;
+        $this->chainedCommands[get_class($object)] = $object;
         return $this;
+    }
+
+    /**
+     * @throws Exception
+     * @return int
+     */
+    public function getFileSizeInBytes(): int
+    {
+        $fileSize = filesize($this->imagePath);
+
+        if (false === $fileSize) {
+            throw new Exception('Unable to file-size of: ' . $this->imagePath);
+        }
+
+        return $fileSize;
     }
 
     /**
@@ -51,9 +66,7 @@ class PHPImageOptim
     {
         foreach ($this->chainedCommands as $chainedCommand) {
             $chainedCommand->setImagePath($this->imagePath);
-            $chainedCommand->determinePreOptimisedFileSize();
             $chainedCommand->optimise();
-            $chainedCommand->determinePostOptimisedFileSize();
         }
 
         return true;

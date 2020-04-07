@@ -8,6 +8,15 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class PngOut extends Common implements ToolsInterface
 {
+    public const OPTIMISATION_LEVEL_BASIC = 1;
+    public const OPTIMISATION_LEVEL_STANDARD = 2;
+    public const OPTIMISATION_LEVEL_EXTREME = 3;
+
+    /**
+     * @var int
+     */
+    protected $optimisationLevel = 1;
+
     /**
      * @throws Exception
      * @return ToolsInterface
@@ -49,6 +58,24 @@ class PngOut extends Common implements ToolsInterface
             default:
                 throw new Exception('Unable to calculate optimisation level');
         }
+    }
+
+    /**
+     * @param int $level
+     * @throws Exception
+     * @return $this
+     */
+    public function setOptimisationLevel(int $level = 2): Common
+    {
+        if (self::OPTIMISATION_LEVEL_BASIC !== $level &&
+            self::OPTIMISATION_LEVEL_STANDARD !== $level &&
+            self::OPTIMISATION_LEVEL_EXTREME !== $level
+        ) {
+            throw new Exception('Invalid Optimisation level');
+        }
+
+        $this->optimisationLevel = $level;
+        return $this;
     }
 
     /**

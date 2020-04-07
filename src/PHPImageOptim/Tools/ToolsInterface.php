@@ -3,10 +3,6 @@ namespace PHPImageOptim\Tools;
 
 interface ToolsInterface
 {
-    public const OPTIMISATION_LEVEL_BASIC = 1;
-    public const OPTIMISATION_LEVEL_STANDARD = 2;
-    public const OPTIMISATION_LEVEL_EXTREME = 3;
-
     /**
      * @return ToolsInterface
      */
@@ -30,20 +26,8 @@ interface ToolsInterface
     public function setImagePath(string $imagePath);
 
     /**
-     * TODO: Remove this?
-     * @return mixed
+     * @param bool $stopOnFailure
+     * @return self
      */
-    public function determinePreOptimisedFileSize();
-
-    /**
-     * TODO: Remove this?
-     * @return mixed
-     */
-    public function determinePostOptimisedFileSize();
-
-    /**
-     * @param int $level
-     * @return mixed
-     */
-    public function setOptimisationLevel(int $level = 2);
+    public function setStopOnFailure(bool $stopOnFailure);
 }
