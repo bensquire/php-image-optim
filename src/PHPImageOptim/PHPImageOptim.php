@@ -13,7 +13,7 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var ToolsInterface[][]
+     * @var ToolsInterface[]
      */
     protected $chainedCommands = [];
 
@@ -40,7 +40,7 @@ class PHPImageOptim
     public function chainCommand(ToolsInterface $object, bool $stopIfFail = true): PHPImageOptim
     {
         $object->setStopOnFailure($stopIfFail);
-        $this->chainedCommands[$object->getCompatibleImageFormat()][get_class($object)] = $object;
+        $this->chainedCommands[get_class($object)] = $object;
         return $this;
     }
 
@@ -66,9 +66,11 @@ class PHPImageOptim
     {
         $fileType = strtolower(pathinfo($this->imagePath, PATHINFO_EXTENSION));
 
-        foreach ($this->chainedCommands[$fileType] as $chainedCommand) {
-            $chainedCommand->setImagePath($this->imagePath);
-            $chainedCommand->optimise();
+        foreach ($this->chainedCommands as $chainedCommand) {
+            if ($chainedCommand->getCompatibleImageFormat() === $fileType) {
+                $chainedCommand->setImagePath($this->imagePath);
+                $chainedCommand->optimise();
+            }
         }
 
         return true;
@@ -80,10 +82,8 @@ class PHPImageOptim
     public function getVersions(): array
     {
         $versions = [];
-        foreach ($this->chainedCommands as $formats) {
-            foreach ($formats as $chainedCommand) {
-                $versions[get_class($chainedCommand)] = $chainedCommand->getVersion();
-            }
+        foreach ($this->chainedCommands as $chainedCommand) {
+            $versions[get_class($chainedCommand)] = $chainedCommand->getVersion();
         }
 
         return $versions;
