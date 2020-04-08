@@ -30,4 +30,9 @@ interface ToolsInterface
      * @return self
      */
     public function setStopOnFailure(bool $stopOnFailure);
+
+    /**
+     * @return string
+     */
+    public function getCompatibleImageFormat(): string;
 }

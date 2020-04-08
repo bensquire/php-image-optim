@@ -8,6 +8,16 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class JpegTran extends Common implements ToolsInterface
 {
+    private const FORMAT = 'jpg';
+
+    /**
+     * @return string
+     */
+    public function getCompatibleImageFormat(): string
+    {
+        return self::FORMAT;
+    }
+
     /**
      * @throws Exception
      * @return ToolsInterface

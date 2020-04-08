@@ -8,10 +8,20 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class Guetzli extends Common implements ToolsInterface
 {
+    private const FORMAT = 'jpg';
+
     /**
      * @var string
      */
     private $attributes;
+
+    /**
+     * @return string
+     */
+    public function getCompatibleImageFormat(): string
+    {
+        return self::FORMAT;
+    }
 
     /**
      * Guetzli constructor.

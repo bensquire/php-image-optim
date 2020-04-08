@@ -26,11 +26,15 @@ $pngOut->setBinaryPath('/usr/local/bin/pngout');
 $pngQuant = new PngQuant();
 $pngQuant->setBinaryPath('/usr/local/bin/pngquant');
 
+$guetzli = new \PHPImageOptim\Tools\Jpeg\Guetzli();
+$guetzli->setBinaryPath('/usr/local/bin/guetzli');
+
 $optim = new PHPImageOptim();
-$optim->setImage('./tests/image/lenna-original.png');
 $optim->chainCommand($pngQuant);
 $optim->chainCommand($advPng);
 $optim->chainCommand($optiPng);
 $optim->chainCommand($pngCrush);
 $optim->chainCommand($pngOut);
+$optim->chainCommand($guetzli); // This won't be used because the image is a PNG
+$optim->setImage('./tests/image/lenna-original.png');
 $optim->optimise();

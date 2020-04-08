@@ -40,7 +40,7 @@ class PHPImageOptim
     public function chainCommand(ToolsInterface $object, bool $stopIfFail = true): PHPImageOptim
     {
         $object->setStopOnFailure($stopIfFail);
-        $this->chainedCommands[get_class($object)] = $object;
+        $this->chainedCommands[$object->getCompatibleImageFormat()][get_class($object)] = $object;
         return $this;
     }
 
@@ -55,8 +55,6 @@ class PHPImageOptim
         if (false === $fileSize) {
             throw new Exception('Unable to file-size of: ' . $this->imagePath);
         }
-
-        return $fileSize;
     }
 
     /**
@@ -64,7 +62,9 @@ class PHPImageOptim
      */
     public function optimise(): bool
     {
-        foreach ($this->chainedCommands as $chainedCommand) {
+        $fileType = strtolower(pathinfo($this->imagePath, PATHINFO_EXTENSION));
+
+        foreach ($this->chainedCommands[$fileType] as $chainedCommand) {
             $chainedCommand->setImagePath($this->imagePath);
             $chainedCommand->optimise();
         }
@@ -78,8 +78,10 @@ class PHPImageOptim
     public function getVersions(): array
     {
         $versions = [];
-        foreach ($this->chainedCommands as $chainedCommand) {
-            $versions[get_class($chainedCommand)] = $chainedCommand->getVersion();
+        foreach ($this->chainedCommands as $formats) {
+            foreach ($formats as $chainedCommand) {
+                $versions[get_class($chainedCommand)] = $chainedCommand->getVersion();
+            }
         }
 
         return $versions;

@@ -8,6 +8,16 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class Gifsicle extends Common implements ToolsInterface
 {
+    private const FORMAT = 'gif';
+
+    /**
+     * @return string
+     */
+    public function getCompatibleImageFormat(): string
+    {
+        return self::FORMAT;
+    }
+
     /**
      * @throws Exception
      * @return ToolsInterface

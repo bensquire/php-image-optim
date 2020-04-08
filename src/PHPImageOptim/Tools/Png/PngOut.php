@@ -8,6 +8,8 @@ use PHPImageOptim\Tools\ToolsInterface;
 
 class PngOut extends Common implements ToolsInterface
 {
+    private const FORMAT = 'png';
+
     public const OPTIMISATION_LEVEL_BASIC = 1;
     public const OPTIMISATION_LEVEL_STANDARD = 2;
     public const OPTIMISATION_LEVEL_EXTREME = 3;
@@ -16,6 +18,14 @@ class PngOut extends Common implements ToolsInterface
      * @var int
      */
     protected $optimisationLevel = 1;
+
+    /**
+     * @return string
+     */
+    public function getCompatibleImageFormat(): string
+    {
+        return self::FORMAT;
+    }
 
     /**
      * @throws Exception
