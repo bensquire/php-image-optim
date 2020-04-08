@@ -13,7 +13,7 @@ class PHPImageOptim
     protected $imagePath = '';
 
     /**
-     * @var ToolsInterface[]
+     * @var ToolsInterface[][]
      */
     protected $chainedCommands = [];
 
@@ -55,6 +55,8 @@ class PHPImageOptim
         if (false === $fileSize) {
             throw new Exception('Unable to file-size of: ' . $this->imagePath);
         }
+
+        return $fileSize;
     }
 
     /**
