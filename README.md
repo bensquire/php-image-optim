@@ -1,5 +1,6 @@
 # php-image-optim
-[![Build Status](https://travis-ci.org/bensquire/php-image-optim.png)](https://travis-ci.org/bensquire/php-image-optim)
+
+[comment]: <> ([![Build Status]&#40;https://travis-ci.org/bensquire/php-image-optim.png&#41;]&#40;https://travis-ci.org/bensquire/php-image-optim&#41;)
 
 The purpose of this library is to help automate the optimisation of images via the command line in PHP,
 
